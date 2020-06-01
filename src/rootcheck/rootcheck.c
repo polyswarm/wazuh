@@ -246,7 +246,7 @@ void rootcheck_connect() {
         mtdebug1(ARGV0, "Starting queue ...");
 
         /* Start the queue */
-        if ((rootcheck.queue = StartMQ(DEFAULTQPATH, WRITE)) < 0) {
+        if ((rootcheck.queue = StartMQWithRetry(DEFAULTQPATH, WRITE, 0)) < 0) {
             mterror_exit(ARGV0, QUEUE_FATAL, DEFAULTQPATH);
         }
     }

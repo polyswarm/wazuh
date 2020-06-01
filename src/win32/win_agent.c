@@ -420,6 +420,11 @@ int StartMQ(__attribute__((unused)) const char *path, __attribute__((unused)) sh
     return (0);
 }
 
+StartMQWithRetry(__attribute__((unused)) const char *path, __attribute__((unused)) short int type,  __attribute__((unused)) short int retries) {
+    connect_server(0);
+    return (0);
+}
+
 char *get_agent_ip()
 {
     typedef char* (*CallFunc)(PIP_ADAPTER_ADDRESSES pCurrAddresses, int ID, char * timestamp);

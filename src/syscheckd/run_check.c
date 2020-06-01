@@ -38,7 +38,7 @@ int send_syscheck_msg(const char *msg)
     if (SendMSG(syscheck.queue, msg, SYSCHECK, SYSCHECK_MQ) < 0) {
         merror(QUEUE_SEND);
 
-        if ((syscheck.queue = StartMQ(DEFAULTQPATH, WRITE)) < 0) {
+        if ((syscheck.queue = StartMQWithRetry(DEFAULTQPATH, WRITE, 0)) < 0) {
             merror_exit(QUEUE_FATAL, DEFAULTQPATH);
         }
 
@@ -55,7 +55,7 @@ int send_rootcheck_msg(const char *msg)
     if (SendMSG(syscheck.queue, msg, ROOTCHECK, ROOTCHECK_MQ) < 0) {
         merror(QUEUE_SEND);
 
-        if ((syscheck.queue = StartMQ(DEFAULTQPATH, WRITE)) < 0) {
+        if ((syscheck.queue = StartMQWithRetry(DEFAULTQPATH, WRITE, 0)) < 0) {
             merror_exit(QUEUE_FATAL, DEFAULTQPATH);
         }
 
