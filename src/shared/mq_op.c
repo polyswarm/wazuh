@@ -56,9 +56,8 @@ int StartMQWithRetry(const char *path, short int type, short int retry_times)
     int sleep_time = 5;
 
     while(socket = StartMQ(path, type), socket < 0) {
+        retries++;
         if(retry_times <= 0 || retries < retry_times) {
-            retries++;
-
             sleep(sleep_time);
 
             // If we failed, we will wait longer before reattempting to connect
@@ -69,6 +68,11 @@ int StartMQWithRetry(const char *path, short int type, short int retry_times)
             break;
         }
     }
+
+    if (socket > 0) {
+        minfo("Succesfully reconnected to %s", path);
+    }
+
     return socket;
 }
 

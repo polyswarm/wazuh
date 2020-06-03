@@ -394,7 +394,7 @@ int main(int argc, char **argv)
 
     /* Connect to the queue */
 
-    if (syscheck.queue = StartMQWithRetry(DEFAULTQPATH, WRITE, 0) < 0) {
+    if ((syscheck.queue = StartMQWithRetry(DEFAULTQPATH, WRITE, 0)) < 0) {
         merror_exit(QUEUE_FATAL, DEFAULTQPATH);
     }
 
